@@ -2,13 +2,20 @@
 after adding second node, second node will point to first node and it'll be new head  now. 
 it's diffrent than usaual where we tend to start with first node and first will point to 
 second and last node will point to  null.*/
+
+
+
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
-struct Node{
-    int data;
-    struct Node* next;
-}*head;
+
+
+struct Node{                //created structure named as node
+    int data;               //for storing data
+    struct Node* next;      //for pointing to next noded
+}*head;                     //pointer head for the node
+
+
 void push(int data){
     struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
     temp->data = data;
