@@ -1,0 +1,118 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node* next;
+}*head;
+void insertatfirst(int ele){
+    struct Node *new = (struct Node*)malloc(sizeof(struct Node));
+    new->data = ele;
+    if(head==NULL){
+        new->next = NULL;
+    }
+    else{
+        new->next = head;
+    }
+    head = new;
+}
+void insertatlast(int ele){
+    
+    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+    struct Node *new = (struct Node*)malloc(sizeof(struct Node));
+
+    new->data = ele;
+    temp = head;
+    if(head==NULL){
+        new->next = NULL;
+        head = new;
+    }
+    else{
+        while(temp->next!=NULL){
+            temp = temp->next;
+        }
+    }
+    temp->next = new;
+    new->next = NULL;
+}
+
+int deletefirst(){
+    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+    if(head==NULL){
+        printf("Underflow!!");
+        return 0;
+    }
+    else{
+        temp = head;
+        head = head->next;
+        return temp->data;
+    }
+}
+int deletelast(){
+    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+    struct Node *prev = (struct Node*)malloc(sizeof(struct Node));
+    if(head==NULL){
+        printf("Underflow!!");
+        return 0;
+    }
+    else if(head->next=NULL){
+        head = NULL;
+        return 0;
+
+    }
+    else{
+        temp = head;
+        while(temp->next!=NULL){
+            prev = temp;
+            temp = temp->next;
+        }
+        
+        prev->next = NULL;
+        
+        return temp->data;
+    }
+}
+void display(){
+    struct Node *temp = (struct Node*)malloc(sizeof(struct Node));
+    temp = head;
+    printf("\n");
+    while(temp!=NULL){
+        printf("%d -> ",temp->data);
+        temp = temp->next;
+    }
+    printf("NULL");
+}
+void main(){
+    char yn;
+    int ch,ele,data;
+    do{
+        printf("\n 1: For Insert at Beginning \n 2: For Insert at end\n 3: For Delete at Beginning \n 4: For Delete at end\n 5: For Display\n \n Your choice: ");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1: printf("\nEnter Element you want to Insert: ");
+                    scanf("%d",&ele);
+                    insertatfirst(ele);
+                    break;
+            case 2: printf("\nEnter Element you want to Insert: ");
+                    scanf("%d",&ele);
+                    insertatlast(ele);
+                    break;
+            
+            case 3:data = deletefirst();
+                    printf("Deleted data is %d",data);
+                    break;
+            case 4:data = deletelast();
+                    printf("Deleted data is %d",data);
+                    break;
+            case 5:display();
+                    break;
+
+            default:
+                    printf("Wrong choice!");
+        }
+        printf("\n\nDo you want to continue? Enter Y for yes: ");
+        scanf(" %c",&yn);
+
+    }while(yn=='Y'||yn=='y');
+    getch();    //for holding the screen
+}
