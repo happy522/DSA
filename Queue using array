@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdbool.h>
+#define MAX 10
+int array[MAX], front=1, rear=0;
+
+bool isFull(){
+    bool isfull;
+    if(rear==MAX){
+        isfull=true;
+    }
+    else{
+        isfull=false;
+    }
+    return isfull;
+}
+
+bool isEmpty(){
+    bool isempty;
+    if(front>rear){
+        isempty = true;
+    }
+    else{
+        isempty = false;
+    }
+    return isempty;
+}
+
+void insert(int ele){
+    if(!isFull()){
+        rear++;
+        array[rear]=ele;
+    }
+    else{
+        printf("\nCan't insert %d element.\n Queue is full.",ele);
+    }
+}
+void delete(){
+    if(!isEmpty()){
+        int popped = array[front];
+        front++;
+        printf("\nElement popped is %d",popped);
+    }
+    else{
+        printf("\nCan't delete element.\n Queue is empty.");
+    }
+}
+void display(){
+    for(int i=front;i<=rear;i++){
+        printf("\nElement[%d] is %d",i,array[i]);
+    }
+}
+void main(){
+    char yn;
+    int ch,ele;
+    do{
+        printf("\n 1: For Push\n 2: For Pop\n 3: For Display\n Your choice:");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1: printf("\nEnter Element you want to push: ");
+                    scanf("%d",&ele);
+                    insert(ele);
+                    break;
+            case 2: delete();
+                    break;
+            case 3: display();
+                    break;
+            default:printf("\nWrong choice.");
+        }
+        printf("\n\nDo you want to continue? Enter Y for yes: ");
+        scanf(" %c",&yn);
+
+    }while(yn=='Y'||yn=='y');
+}
